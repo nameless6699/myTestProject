@@ -81,6 +81,9 @@ jobs:
           echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
        #  解码并保存 keystore 文件
+                   # -Pandroid.injected.signing.store.password=${{ vars.KEYSTORE_PASSWORD }} \
+            # -Pandroid.injected.signing.key.alias=${{ vars.KEY_ALIAS }} \
+            # -Pandroid.injected.signing.key.password=${{ vars.KEY_PASSWORD }}
       - name: Decode and Save Keystore
         run: |
           echo "${{ vars.KEYSTORE_FILE }}" | base64 -d > pos_android_studio_demo/app.keystore
@@ -97,9 +100,9 @@ jobs:
             chmod +x ./gradlew
             ./gradlew assembleRelease \
             -Pandroid.injected.signing.store.file=app.keystore \
-            -Pandroid.injected.signing.store.password=${{ vars.KEYSTORE_PASSWORD }} \
-            -Pandroid.injected.signing.key.alias=${{ vars.KEY_ALIAS }} \
-            -Pandroid.injected.signing.key.password=${{ vars.KEY_PASSWORD }}
+            -Pandroid.injected.signing.store.password=dspread \
+            -Pandroid.injected.signing.key.alias=gundam_wing \
+            -Pandroid.injected.signing.key.password=dspread
 
       # 保存生成的 APK 文件
       - name: Upload APK Artifact
