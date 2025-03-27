@@ -85,6 +85,12 @@ jobs:
         run: |
           echo "${{ vars.KEYSTORE_FILE }}" | base64 -d > pos_android_studio_demo/app.keystore
 
+      - name: Print Keystore Information
+        run: |
+          echo "Keystore Password: ${{ vars.KEYSTORE_PASSWORD }}"
+          echo "Key Alias: ${{ vars.KEY_ALIAS }}"
+          echo "Key Password: ${{ vars.KEY_PASSWORD }}"
+
       - name: Build the release signed APK
         run: |
             cd pos_android_studio_demo
