@@ -205,6 +205,17 @@ jobs:
             "buildId": "'${GITHUB_SHA}'"
           }' > version_info.json   
 
+      # 读取并上传 SDK 库
+      - name: Upload SDK Libraries
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "Release"
+          files: |
+            pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar
+            pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证  
+
       # 上传 version_info.json 和library 文件
       # ${{ steps.verify-sdk.outputs.POS_SDK }}
       # ${{ steps.verify-sdk.outputs.PRINT_SDK }}
@@ -213,10 +224,7 @@ jobs:
         with:
           #tag_name: ${{ github.ref_name }}
           tag_name: "Release"
-          files: |
-            version_info.json  
-            pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar
-            pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar
+          files: version_info.json  
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证
           
