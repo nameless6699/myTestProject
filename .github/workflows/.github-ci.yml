@@ -176,15 +176,18 @@ jobs:
       - name: Install Semantic Release and dependencies
         run: |
           npm install -g semantic-release @semantic-release/git @semantic-release/github @semantic-release/changelog conventional-changelog-conventionalcommits --force
-
+            
+          
+      # echo "POS_SDK=$POS_SDK" >> $GITHUB_OUTPUT
+      # echo "PRINT_SDK=$PRINT_SDK" >> $GITHUB_OUTPUT
       - name: Verify SDK Files
         id: verify-sdk
         run: |
             POS_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar)
             PRINT_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar)
-            echo "POS_SDK=$POS_SDK" >> $GITHUB_OUTPUT
-            echo "PRINT_SDK=$PRINT_SDK" >> $GITHUB_OUTPUT
-
+            echo "POS_SDK=$POS_SDK"
+            echo "PRINT_SDK=$PRINT_SDK"
+            
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -203,6 +206,8 @@ jobs:
           }' > version_info.json   
 
       # 上传 version_info.json 和library 文件
+      # ${{ steps.verify-sdk.outputs.POS_SDK }}
+      # ${{ steps.verify-sdk.outputs.PRINT_SDK }}
       - name: Upload JSON to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
@@ -210,8 +215,8 @@ jobs:
           tag_name: "Release"
           files: |
             version_info.json  
-            ${{ steps.verify-sdk.outputs.POS_SDK }}
-            ${{ steps.verify-sdk.outputs.PRINT_SDK }}
+            pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar
+            pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证
           
