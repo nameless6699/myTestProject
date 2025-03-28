@@ -1,3 +1,10 @@
+# 1.0.0 (2025-03-28)
+
+
+### Bug Fixes
+
+* update ([6b77bb5](https://github.com/nameless6699/myTestProject/commit/6b77bb57486b225d41d890d2310f36ff5f4795d8))
+
 ## [5.2.2](https://github.com/DspreadOrg/android/compare/v5.2.1...v5.2.2) (2025-03-26)
 
 
