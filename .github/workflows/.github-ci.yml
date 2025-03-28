@@ -3,10 +3,10 @@ name: Android CI/CD
 on:
   push:
     branches:
-      - main  # 触发 CI/CD 的分支
+      - master  # 触发 CI/CD 的分支
   pull_request:
     branches:
-      - main  # 监听到 PR 到 main 分支时触发 CI/CD
+      - master  # 监听到 PR 到 main 分支时触发 CI/CD
 
 jobs:
   lint:
@@ -187,7 +187,7 @@ jobs:
             PRINT_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar)
             echo "POS_SDK=$POS_SDK"
             echo "PRINT_SDK=$PRINT_SDK"
-            
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
