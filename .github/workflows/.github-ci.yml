@@ -114,6 +114,15 @@ jobs:
       - name: List APK files
         run: ls -R pos_android_studio_demo/pos_android_studio_app/build/outputs/apk/release  # 列出 APK 文件，确保路径正确
       
+      # 保存SDK 库文件
+      - name: Upload SDK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dspread-sdks
+          path: |
+            pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar
+            pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar     
+        
       # - name: Generate short SHA for tag
       #   id: generate_tag
       #   run: |
@@ -175,13 +184,20 @@ jobs:
 
       # echo "POS_SDK=$POS_SDK" >> $GITHUB_OUTPUT
       # echo "PRINT_SDK=$PRINT_SDK" >> $GITHUB_OUTPUT
+
+      - name: Download SDK Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dspread-sdks
+          path: sdks  # 指定下载路径
+
       - name: Verify SDK Files
         id: verify-sdk
         run: |
-            POS_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar)
-            PRINT_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar)
-            echo "POS_SDK=$POS_SDK"
-            echo "PRINT_SDK=$PRINT_SDK"
+          POS_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_pos_sdk_*.jar)
+          PRINT_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar)
+          echo "POS_SDK=$POS_SDK" >> $GITHUB_OUTPUT
+          echo "PRINT_SDK=$PRINT_SDK" >> $GITHUB_OUTPUT
 
       - name: Install Semantic Release and dependencies
         run: |
@@ -216,14 +232,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证  
 
       # 上传 version_info.json 和library 文件
-      # ${{ steps.verify-sdk.outputs.POS_SDK }}
-      # ${{ steps.verify-sdk.outputs.PRINT_SDK }}
       - name: Upload JSON to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
           #tag_name: ${{ github.ref_name }}
           tag_name: "Release"
-          files: version_info.json  
+          files: |
+            version_info.json  
+            ${{ steps.verify-sdk.outputs.POS_SDK }}
+            ${{ steps.verify-sdk.outputs.PRINT_SDK }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 进行认证
           
