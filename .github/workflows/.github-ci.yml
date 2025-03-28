@@ -173,11 +173,6 @@ jobs:
       - name: Verify APK file in release
         run: ls -R pos_android_studio_demo/pos_android_studio_app/build/outputs/apk/release  # 列出 APK 文件，确保路径正确
 
-      - name: Install Semantic Release and dependencies
-        run: |
-          npm install -g semantic-release @semantic-release/git @semantic-release/github @semantic-release/changelog conventional-changelog-conventionalcommits --force
-            
-          
       # echo "POS_SDK=$POS_SDK" >> $GITHUB_OUTPUT
       # echo "PRINT_SDK=$PRINT_SDK" >> $GITHUB_OUTPUT
       - name: Verify SDK Files
@@ -187,6 +182,10 @@ jobs:
             PRINT_SDK=$(ls pos_android_studio_demo/pos_android_studio_app/libs/dspread_print_sdk-*-beta.aar)
             echo "POS_SDK=$POS_SDK"
             echo "PRINT_SDK=$PRINT_SDK"
+
+      - name: Install Semantic Release and dependencies
+        run: |
+          npm install -g semantic-release @semantic-release/git @semantic-release/github @semantic-release/changelog conventional-changelog-conventionalcommits --force
 
       - name: Run semantic-release
         env:
