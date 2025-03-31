@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/nameless6699/myTestProject/compare/v1.0.1...v1.0.2) (2025-03-31)
+
+
+### Bug Fixes
+
+* change the tag name of SDK ([c686a80](https://github.com/nameless6699/myTestProject/commit/c686a805311786fc9db253a9d0b94135e8819c87))
+
 ## [1.0.1](https://github.com/nameless6699/myTestProject/compare/v1.0.0...v1.0.1) (2025-03-28)
 
 
