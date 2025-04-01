@@ -149,11 +149,11 @@ jobs:
       # echo "POS_SDK=$POS_SDK" >> $GITHUB_OUTPUT
       # echo "PRINT_SDK=$PRINT_SDK" >> $GITHUB_OUTPUT
 
-      - name: Download SDK Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dspread-sdks
-          path: sdks  # 指定下载路径
+      # - name: Download SDK Artifacts
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: dspread-sdks
+      #     path: sdks  # 指定下载路径
 
       - name: Verify SDK Files
         id: verify-sdk
