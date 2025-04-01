@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/nameless6699/myTestProject/compare/v1.0.2...v1.0.3) (2025-04-01)
+
+
+### Bug Fixes
+
+* delete useless script ([f7dc92b](https://github.com/nameless6699/myTestProject/commit/f7dc92b0460873ed325b5e03f6e9cf19cc966d96))
+
 ## [1.0.2](https://github.com/nameless6699/myTestProject/compare/v1.0.1...v1.0.2) (2025-03-31)
 
 
