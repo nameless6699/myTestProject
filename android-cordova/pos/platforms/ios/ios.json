@@ -1,0 +1,39 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"dspread_pos_plugin\"><param name=\"ios-package\" value=\"dspread_pos_plugin\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "posPlugin": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "posPlugin.dspread_pos_plugin",
+      "file": "plugins/posPlugin/www/dspread_pos_plugin.js",
+      "pluginId": "posPlugin",
+      "clobbers": [
+        "cordova.plugins.dspread_pos_plugin"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "posPlugin": "1.2.5"
+  }
+}

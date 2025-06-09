@@ -1,0 +1,61 @@
+image: beevelop/cordova:latest
+
+stages:
+  - test
+  - deploy
+  - release
+  
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+
+# build_web:
+#   stage: test
+#   only:
+#       - master
+#   script:
+#     - npm install
+#     - npm run lint
+#     - npm run scss-lint
+#     - npm run test
+#     - npm run build
+#     - npm run e2e
+
+# build_ios:
+#   stage: deploy
+#   only:
+#     - release
+#   script:
+#     - ./sh/ionic-login.sh
+#     - ls
+#     - npm run ios:release:ci
+#     - ./sh/ionic-package-ios.sh
+
+build_android:
+  stage: deploy
+  script:
+    - npm i -g cordova ionic yarn
+    - ls
+    - cd android-cordova/pos/
+    - npm install
+    - ls
+    - cordova build android
+    - ls
+    - ls platforms/android/app/build/outputs/apk/debug/
+  artifacts:
+    paths:
+      - /builds/dspread/cordova-plugin/android-cordova/pos/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+
+release_job:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo "Running the release job."
+  release:
+    name: 'Release $CI_COMMIT_TAG'
+    tag_name: '$CI_COMMIT_TAG'
+    description: 'Release created using the release-cli.'
