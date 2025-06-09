@@ -29,7 +29,7 @@ jobs:
       - name: Read version from config.xml
         id: version
         run: |
-          VERSION=$(xmlstarlet sel -t -v "/widget/@version" android-cordova/pos/config.xml)
+          VERSION=$(xmlstarlet sel -N w="http://www.w3.org/ns/widgets" -t -v "/w:widget/@version" android-cordova/pos/config.xml)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Check if tag exists
