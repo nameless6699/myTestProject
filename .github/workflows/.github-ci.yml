@@ -71,7 +71,17 @@ jobs:
             distribution: 'temurin'
             java-version: '11'
 
-      - name: Add Android platform & build APK
+      - name: Clean old build artifacts
+        working-directory: ./android-cordova/pos
+        run: |
+          rm -rf platforms plugins www
+          npm install
+
+      - name: Add Android platform
+        working-directory: ./android-cordova/pos
+        run: cordova platform add android@13.0.0
+
+      - name: build APK
         working-directory: ./android-cordova/pos
         run: |
           cordova build android --release -- \
