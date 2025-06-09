@@ -36,6 +36,7 @@ jobs:
         id: tag_check
         run: |
           TAG="v${{ steps.version.outputs.version }}"
+          git fetch --tags
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "Tag $TAG already exists. Skipping tagging."
             echo "exists=true" >> $GITHUB_OUTPUT
