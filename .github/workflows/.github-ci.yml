@@ -74,8 +74,6 @@ jobs:
       - name: Add Android platform & build APK
         working-directory: ./android-cordova/pos
         run: |
-          cordova platform remove android || true
-          cordova platform add android
           cordova build android --release -- \
             --keystore=../../../my-release-key.keystore \
             --storePassword=${{ secrets.CORDOVA_KEYSTORE_PASSWORD }} \
