@@ -88,7 +88,7 @@ jobs:
         working-directory: ./android-cordova/pos
         run: |
           cordova platform add android
-          cordova plugin add ././posPlugin
+          cordova plugin add ../../posPlugin
 
       - name: build APK
         working-directory: ./android-cordova/pos
