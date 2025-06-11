@@ -77,11 +77,17 @@ jobs:
     #       rm -rf platforms plugins www
     #       npm install
 
-      - name: Add Android platform
+      - name: Clean platforms and plugin
+        run: |
+          cordova platform rm android || true
+          cordova plugin rm posPlugin || true
+
+
+      - name: Add Android platform and plugin
         working-directory: ./android-cordova/pos
         run: |
-          cordova platform remove android
           cordova platform add android
+          cordova plugin add ./path/to/posPlugin
 
       - name: build APK
         working-directory: ./android-cordova/pos
