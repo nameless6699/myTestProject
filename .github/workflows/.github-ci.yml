@@ -78,6 +78,7 @@ jobs:
     #       npm install
 
       - name: Clean platforms and plugin
+        working-directory: ./android-cordova/pos
         run: |
           cordova platform rm android || true
           cordova plugin rm posPlugin || true
