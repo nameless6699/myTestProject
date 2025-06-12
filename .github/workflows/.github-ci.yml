@@ -104,7 +104,8 @@ jobs:
             --keystore=../../my-release-key.keystore \
             --storePassword=${{ secrets.CORDOVA_KEYSTORE_PASSWORD }} \
             --alias=${{ secrets.CORDOVA_KEY_ALIAS }} \
-            --password=${{ secrets.CORDOVA_KEY_PASSWORD }}
+            --password=${{ secrets.CORDOVA_KEY_PASSWORD }} \
+            -- --packageType=apk
 
       - name: Get APK path
         id: get_apk
