@@ -65,6 +65,14 @@ jobs:
         env:
           CORDOVA_KEYSTORE: ${{ secrets.CORDOVA_KEYSTORE }}
 
+      - name: Show keystore info (for debug)
+        run: |
+          echo "Listing keystore file..."
+          ls -lh my-release-key.keystore
+          echo "Keystore absolute path:"
+          realpath my-release-key.keystore
+
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
