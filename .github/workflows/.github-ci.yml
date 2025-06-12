@@ -97,15 +97,22 @@ jobs:
       #     cordova platform add android
       #     cordova plugin add ../../plugin --force
 
+      - name: Create build.json for signing
+        run: |
+          echo '{
+            "android": {
+              "keystore": "my-release-key.keystore",
+              "storePassword": "${{ secrets.CORDOVA_KEYSTORE_PASSWORD }}",
+              "alias": "${{ secrets.CORDOVA_KEY_ALIAS }}",
+              "password": "${{ secrets.CORDOVA_KEY_PASSWORD }}",
+              "keystoreType": ""
+              }
+          }' > build.json
+
       - name: build APK
         working-directory: ./android-cordova/pos
         run: |
-          cordova build android --release -- \
-            --keystore=../../my-release-key.keystore \
-            --storePassword=${{ secrets.CORDOVA_KEYSTORE_PASSWORD }} \
-            --alias=${{ secrets.CORDOVA_KEY_ALIAS }} \
-            --password=${{ secrets.CORDOVA_KEY_PASSWORD }} \
-            -- --packageType=apk
+          cordova build android --release --buildConfig=build.json -- --packageType=apk
 
       - name: Get APK path
         id: get_apk
