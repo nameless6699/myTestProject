@@ -100,15 +100,17 @@ jobs:
       - name: Create build.json for signing
         working-directory: ./android-cordova/pos
         run: |
-          echo '{
+           echo '{
             "android": {
-              "keystore": "my-release-key.keystore",
-              "storePassword": "${{ secrets.CORDOVA_KEYSTORE_PASSWORD }}",
-              "alias": "${{ secrets.CORDOVA_KEY_ALIAS }}",
-              "password": "${{ secrets.CORDOVA_KEY_PASSWORD }}",
-              "keystoreType": ""
+              "release":{
+                "keystore": "my-release-key.keystore",
+                "storePassword": "${{ secrets.CORDOVA_KEYSTORE_PASSWORD }}",
+                "alias": "${{ secrets.CORDOVA_KEY_ALIAS }}",
+                "password": "${{ secrets.CORDOVA_KEY_PASSWORD }}",
+                "keystoreType": ""
+                }
               }
-          }' > build.json
+            }' > build.json
 
       - name: build APK
         working-directory: ./android-cordova/pos
