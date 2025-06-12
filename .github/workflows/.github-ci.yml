@@ -80,15 +80,16 @@ jobs:
       - name: Clean platforms and plugin
         working-directory: ./android-cordova/pos
         run: |
-          cordova platform rm android || true
           cordova plugin rm posPlugin || true
-
-
-      - name: Add Android platform and plugin
-        working-directory: ./android-cordova/pos
-        run: |
+          cordova platform rm android || true
           cordova platform add android
-          cordova plugin add ../../plugin
+          cordova plugin add ../../plugin --force
+
+      # - name: Add Android platform and plugin
+      #   working-directory: ./android-cordova/pos
+      #   run: |
+      #     cordova platform add android
+      #     cordova plugin add ../../plugin --force
 
       - name: build APK
         working-directory: ./android-cordova/pos
