@@ -63,7 +63,7 @@ jobs:
         run: |
           echo "$CORDOVA_KEYSTORE" | base64 -d > my-release-key.keystore
         env:
-          CORDOVA_KEYSTORE_BASE64: ${{ secrets.CORDOVA_KEYSTORE }}
+          CORDOVA_KEYSTORE: ${{ secrets.CORDOVA_KEYSTORE }}
 
       - name: Setup Java
         uses: actions/setup-java@v3
