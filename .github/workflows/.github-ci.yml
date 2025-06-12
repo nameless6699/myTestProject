@@ -61,7 +61,7 @@ jobs:
 
       - name: Restore Keystore
         run: |
-          echo "$CORDOVA_KEYSTORE_BASE64" | base64 -d > my-release-key.keystore
+          echo "$CORDOVA_KEYSTORE" | base64 -d > my-release-key.keystore
         env:
           CORDOVA_KEYSTORE_BASE64: ${{ secrets.CORDOVA_KEYSTORE }}
 
