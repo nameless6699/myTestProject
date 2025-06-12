@@ -61,16 +61,16 @@ jobs:
 
       - name: Restore Keystore
         run: |
-          echo "$CORDOVA_KEYSTORE" | base64 -d > my-release-key.keystore
+          echo "$CORDOVA_KEYSTORE" | base64 -d > android-cordova/pos/app.keystore
         env:
           CORDOVA_KEYSTORE: ${{ secrets.CORDOVA_KEYSTORE }}
 
       - name: Show keystore info (for debug)
         run: |
           echo "Listing keystore file..."
-          ls -lh my-release-key.keystore
+          ls -lh app.keystore
           echo "Keystore absolute path:"
-          realpath my-release-key.keystore
+          realpath app.keystore
 
 
       - name: Setup Java
@@ -101,7 +101,7 @@ jobs:
         working-directory: ./android-cordova/pos
         run: |
           cordova build android --release -- \
-            --keystore=../../my-release-key.keystore \
+            --keystore= app.keystore \
             --storePassword=${{ secrets.CORDOVA_KEYSTORE_PASSWORD }} \
             --alias=${{ secrets.CORDOVA_KEY_ALIAS }} \
             --password=${{ secrets.CORDOVA_KEY_PASSWORD }}
