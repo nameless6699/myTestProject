@@ -98,6 +98,7 @@ jobs:
       #     cordova plugin add ../../plugin --force
 
       - name: Create build.json for signing
+        working-directory: ./android-cordova/pos
         run: |
           echo '{
             "android": {
