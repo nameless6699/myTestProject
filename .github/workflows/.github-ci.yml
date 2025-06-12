@@ -61,17 +61,16 @@ jobs:
 
       - name: Restore Keystore
         run: |
-          echo "$CORDOVA_KEYSTORE" | base64 -d > android-cordova/pos/app.keystore
+          echo "$CORDOVA_KEYSTORE" | base64 -d > my-release-key.keystore
         env:
           CORDOVA_KEYSTORE: ${{ secrets.CORDOVA_KEYSTORE }}
 
       - name: Show keystore info (for debug)
         run: |
-          cd android-cordova/pos
           echo "Listing keystore file..."
-          ls -lh app.keystore
+          ls -lh my-release-key.keystore
           echo "Keystore absolute path:"
-          realpath app.keystore
+          realpath my-release-key.keystore
 
 
       - name: Setup Java
@@ -102,7 +101,7 @@ jobs:
         working-directory: ./android-cordova/pos
         run: |
           cordova build android --release -- \
-            --keystore= app.keystore \
+            --keystore=../../my-release-key.keystore \
             --storePassword=${{ secrets.CORDOVA_KEYSTORE_PASSWORD }} \
             --alias=${{ secrets.CORDOVA_KEY_ALIAS }} \
             --password=${{ secrets.CORDOVA_KEY_PASSWORD }}
@@ -118,6 +117,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}
+          name: Release v${{ steps.version.outputs.version }}
           files: ${{ steps.get_apk.outputs.apk_path }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
