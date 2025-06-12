@@ -67,6 +67,7 @@ jobs:
 
       - name: Show keystore info (for debug)
         run: |
+          cd android-cordova/pos
           echo "Listing keystore file..."
           ls -lh app.keystore
           echo "Keystore absolute path:"
