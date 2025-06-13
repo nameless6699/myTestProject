@@ -115,8 +115,11 @@ jobs:
       - name: build APK
         working-directory: ./android-cordova/pos
         run: |
-          cordova build android --release --buildConfig=build.json -- --packageType=apk
+          cordova prepare android
+          cd platforms/android
+          ./gradlew assembleRelease
 
+          
       - name: Get APK path
         id: get_apk
         run: |
