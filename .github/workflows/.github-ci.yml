@@ -103,7 +103,7 @@ jobs:
            echo '{
             "android": {
               "release":{
-                "keystore": "my-release-key.keystore",
+                "keystore": "../../my-release-key.keystore",
                 "storePassword": "${{ secrets.CORDOVA_KEYSTORE_PASSWORD }}",
                 "alias": "${{ secrets.CORDOVA_KEY_ALIAS }}",
                 "password": "${{ secrets.CORDOVA_KEY_PASSWORD }}",
